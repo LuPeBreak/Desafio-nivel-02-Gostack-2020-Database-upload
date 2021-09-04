@@ -10,6 +10,7 @@ import ImportTransactionsService from '../services/ImportTransactionsService';
 
 // configs
 import uploadsConfig from '../configs/uploads';
+import { getCustomRepository } from 'typeorm';
 
 const transactionsRouter = Router();
 
@@ -17,7 +18,7 @@ const transactionsRouter = Router();
 const upload = multer(uploadsConfig);
 
 transactionsRouter.get('/', async (request, response) => {
-  const transactionRepository = new TransactionsRepository();
+  const transactionRepository = getCustomRepository(TransactionsRepository);
 
   const transactions = await transactionRepository.find();
 
